@@ -12,15 +12,20 @@ namespace vega {
 		std::string Title;
 		unsigned int Width;
 		unsigned int Height;
-		bool VSync;
 		WindowAPI Api;
-		unsigned int AntialiasingLevel;
+		bool Fullscreen;
+		// bool VSync;
+		// unsigned int AntialiasingLevel;
 	};
 
 	class Window
 	{
 	public:
 		static Shared<Window> Create(const WindowSpec& spec);
+
+		virtual bool Init() = 0;
+		virtual void Release() = 0;
+		virtual void Frame(bool& isRunning) = 0;
 
 		virtual unsigned int GetWidth() const = 0;
 		virtual unsigned int GetHeight() const = 0;

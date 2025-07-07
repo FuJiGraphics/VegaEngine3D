@@ -22,16 +22,17 @@ files
 includedirs
 {
 	"%{IncludeDir.Workspace}/",
-	"%{IncludeDir.VegaEngine}/src/",
+	"%{IncludeDir.VegaEngine}/",
 }
 
 libdirs
 {
-
+	"%{LibraryDir.VegaEngine}/"
 }
 
 links
 {
+	"VegaEngine.lib"
 }
 
 prebuildcommands 

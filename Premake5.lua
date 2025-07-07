@@ -26,7 +26,7 @@ workspace "Solution"
 
 	-- Library Path
 	LibraryDir = {}
-	LibraryDir["Box2D"]			= "%{wks.location}/Vendor/Box2D/lib"
+	LibraryDir["VegaEngine"]	= "%{wks.location}/Build/bin/%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}/VegaEngine"
 
 	-- DLL Working Directories
 	WorkingDir = {}

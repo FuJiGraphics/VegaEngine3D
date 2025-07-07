@@ -35,6 +35,10 @@ prebuildcommands
 
 links
 {
+	"d3d11.lib",
+	"D3DCompiler.lib",
+	"dxgi.lib",
+	"dxguid.lib",
 }
 
 filter "system:Windows"

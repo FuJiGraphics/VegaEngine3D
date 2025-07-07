@@ -3,10 +3,14 @@
 
 namespace vega {
 
+	class Window;
+	class LayerContainer;
+
 	class System
 	{
 	public:
 		System(int width, int height, const std::string& title);
+		virtual ~System() = default;
 
 		void Init();
 		void Release();
@@ -17,6 +21,10 @@ namespace vega {
 	private:
 		bool m_IsRunning = true;
 
+		Shared<Window> m_Window;
+		// Shared<LayerContainer> m_LayerContainer;
 	};
+
+	System* CreateSystem();
 
 } // namespace vega
