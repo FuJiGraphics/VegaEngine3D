@@ -5,16 +5,19 @@ namespace vega {
 
 	Application::Application()
 	{
+
 	}
 
 
 	Application::Application(const Application& other)
 	{
+
 	}
 
 
 	Application::~Application()
 	{
+
 	}
 
 

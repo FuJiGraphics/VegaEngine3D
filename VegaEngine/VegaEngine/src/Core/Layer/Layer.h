@@ -5,6 +5,9 @@ namespace vega {
 
 	class Event;
 
+	/**
+	 * @
+	 */
 	class Layer
 	{
 	protected:
@@ -19,8 +22,8 @@ namespace vega {
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		// virtual void OnUpdate(float dt) {}
-		// virtual void OnEvent(vega::Event& ev) {}
+		virtual void OnUpdate(float dt) {}
+		virtual void OnEvent(vega::Event& ev) {}
 		virtual void OnUI() {}
 
 		inline const std::string& GetName() const { return m_DebugName; }

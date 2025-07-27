@@ -5,6 +5,7 @@ namespace vega {
 	enum class WindowAPI
 	{
 		Win32,
+		SDL2,
 	};
 
 	struct WindowSpec

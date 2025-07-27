@@ -5,10 +5,9 @@
 
 namespace vega {
 
-	LayerContainer::LayerContainer(Shared<LayerPool>& linkPool)
+	LayerContainer::LayerContainer()
 		: m_Layers()
 		, m_InsertIndex(0)
-		, m_Pool(linkPool)
 	{
 		// Empty
 	}
@@ -28,8 +27,12 @@ namespace vega {
 			if (layer != nullptr)
 			{
 				layer->OnDetach();
-				m_Pool->Return(layer);
 			}
+		}
+
+		for (Layer* layer : m_Layers)
+		{
+			VG_RELEASE_PTR(layer);
 		}
 		m_Layers.clear();
 	}
@@ -55,7 +58,7 @@ namespace vega {
 			layer->OnDetach();
 			m_Layers.erase(it);
 			m_InsertIndex--;
-			m_Pool->Return(layer);
+			VG_RELEASE_PTR(layer);
 		}
 	}
 
@@ -66,7 +69,7 @@ namespace vega {
 		{
 			overlay->OnDetach();
 			m_Layers.erase(it);
-			m_Pool->Return(overlay);
+			VG_RELEASE_PTR(overlay);
 		}
 	}
 

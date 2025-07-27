@@ -7,6 +7,7 @@
     ClassName(const ClassName&) = delete;               \
     ClassName& operator=(const ClassName&) = delete;
 
+
 #define VG_RELEASE_PTR(ptr)         \
     if((ptr) != nullptr)  \
     {                               \

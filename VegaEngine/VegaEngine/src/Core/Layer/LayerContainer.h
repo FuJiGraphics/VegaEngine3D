@@ -7,7 +7,7 @@ namespace vega {
 	class Layer;
 	class LayerPool;
 
-	class LayerContainer
+	class LayerContainer final
 	{
 	protected:
 		// Using
@@ -20,7 +20,7 @@ namespace vega {
 		VG_DELETE_COPY(LayerContainer)
 
 	public:
-		LayerContainer(Shared<LayerPool>& linkPool);
+		LayerContainer();
 		virtual ~LayerContainer();
 
 		void Release();
@@ -30,22 +30,21 @@ namespace vega {
 		void PopLayer(Layer* layer);
 		void PopOverlay(Layer* layer);
 
-		inline unsigned int size() const			{ return m_Layers.size(); }
-		inline bool empty() const					{ return m_Layers.empty(); }
+		inline unsigned int size() const { return m_Layers.size(); }
+		inline bool empty() const { return m_Layers.empty(); }
 
-		inline Iter begin()							{ return m_Layers.begin(); }
-		inline Iter end()							{ return m_Layers.end(); }
-		inline Reverse_iter rbegin()				{ return m_Layers.rbegin(); }
-		inline Reverse_iter rend()					{ return m_Layers.rend(); }
+		inline Iter begin()	{ return m_Layers.begin(); }
+		inline Iter end() { return m_Layers.end(); }
+		inline Reverse_iter rbegin() { return m_Layers.rbegin(); }
+		inline Reverse_iter rend() { return m_Layers.rend(); }
 
-		inline Const_iter begin() const				{ return m_Layers.begin(); }
-		inline Const_iter end() const				{ return m_Layers.end(); }
-		inline Const_reverse_iter rbegin() const	{ return m_Layers.rbegin(); }
-		inline Const_reverse_iter rend() const		{ return m_Layers.rend(); }
+		inline Const_iter begin() const	{ return m_Layers.begin(); }
+		inline Const_iter end() const { return m_Layers.end(); }
+		inline Const_reverse_iter rbegin() const { return m_Layers.rbegin(); }
+		inline Const_reverse_iter rend() const { return m_Layers.rend(); }
 
 	private:
 		std::vector<Layer*>		m_Layers;
-		Shared<LayerPool>&		m_Pool;
 		unsigned int			m_InsertIndex;
 	};
 

@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Window.h"
 #include "Platform/DirectX11/Window/WindowDX11.h"
+#include "Platform/DirectX11/Window/WindowSDL2.h"
 
 namespace vega {
 
@@ -12,6 +13,8 @@ namespace vega {
 		{
 			case WindowAPI::Win32:
 				return CreateShared<WindowDX11>(spec);
+			case WindowAPI::SDL2:
+				return CreateShared<WindowSDL2>(spec);
 		}
 	}
 
