@@ -23,10 +23,12 @@ includedirs
 {
 	"%{IncludeDir.VegaEngine}/",
 	"%{IncludeDir.Workspace}/",
+	"%{IncludeDir.SDL2}/",
 }
 
 libdirs
 {
+	"%{LibraryDir.SDL2}/",
 }
 
 prebuildcommands 
@@ -39,6 +41,7 @@ links
 	"D3DCompiler.lib",
 	"dxgi.lib",
 	"dxguid.lib",
+	"SDL2.lib",
 }
 
 filter "system:Windows"

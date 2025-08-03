@@ -8,7 +8,7 @@ int main(int argc, char** argv)
 	app->Init();
 	while (app->IsRunning())
 	{
-		app->Run();
+		app->Frame();
 	}
 	app->Release();
 

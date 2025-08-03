@@ -1,31 +1,31 @@
 #pragma once
 #include "Defines.h"
-#include <windows.h>
+
+// SDL
+struct SDL_Window;
+struct SDL_Surface;
 
 namespace vega {
 
-	class Window;
+	class IWindow;
 	struct WindowSpec;
-	class Input;
-	class Application;
 
-	class WindowSDL2 : public Window
+	class WindowSDL2 : public IWindow
 	{
 	public:
 		WindowSDL2(const WindowSpec& spec);
 		virtual ~WindowSDL2();
 
-		bool Init() final;
+		void Init() final;
 		void Release() final;
-		void Frame(bool& isRunning) final;
+		void PollEvent() final;
+		void Frame() final;
 
-		inline unsigned int GetWidth() const final;
-		inline unsigned int GetHeight() const final;
-		inline const std::string& GetTitle() const final;
+		inline unsigned int GetWidth() const final { return m_Width; }
+		inline unsigned int GetHeight() const final { return m_Height; }
+		inline std::string GetTitle() const final { return m_Title; }
 
-	private:
-		void InitWindow();
-		void ReleaseWindow();
+		void SetEventCallback(const EventCallbackFn& callback) final;
 
 	private:
 		unsigned int m_Width;
@@ -34,11 +34,9 @@ namespace vega {
 		bool m_IsFullscreen;
 		bool m_IsReleased;
 
-		Input* m_Input;
-		Application* m_Application;
-
-		HINSTANCE m_Hinstance;
-		HWND m_Hwnd;
+		EventCallbackFn	m_EventCallbackFunc;
+		SDL_Window* m_pWindow;
+		SDL_Surface* m_pSurface;
 	};
 
 } // namespace vega

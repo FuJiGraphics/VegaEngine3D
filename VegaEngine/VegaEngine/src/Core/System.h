@@ -3,8 +3,9 @@
 
 namespace vega {
 
-	class Window;
+	class IWindow;
 	class LayerContainer;
+	class Event;
 
 	class System
 	{
@@ -14,14 +15,15 @@ namespace vega {
 
 		void Init();
 		void Release();
-		void Run();
+		void Frame();
+		void OnEvent(vega::Event& e);
 
 		inline bool IsRunning() const { return m_IsRunning; }
 
 	private:
 		bool m_IsRunning = true;
 
-		Shared<Window> m_Window;
+		Shared<IWindow> m_Window;
 		// Shared<LayerContainer> m_LayerContainer;
 	};
 

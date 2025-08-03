@@ -1,6 +1,8 @@
 #include "pch.h"
+
 #include <SDL.h>
-#include "Core/Window.h"
+
+#include "Core/IWindow.h"
 #include "WindowSDL2.h"
 
 namespace vega {
@@ -11,10 +13,9 @@ namespace vega {
 		, m_Title(spec.Title)
 		, m_IsFullscreen(spec.Fullscreen)
 		, m_IsReleased(false)
-		, m_Input(nullptr)
-		, m_Application(nullptr)
-		, m_Hinstance(NULL)
-		, m_Hwnd(NULL)
+		, m_EventCallbackFunc(nullptr)
+		, m_pWindow(nullptr)
+		, m_pSurface(nullptr)
 	{
 		// Empty
 	}
@@ -23,41 +24,89 @@ namespace vega {
 	{
 	}
 
-	bool WindowSDL2::Init()
+	void WindowSDL2::Init()
 	{
-		return false;
+
+		FZLOG_ASSERT(SDL_Init(SDL_INIT_VIDEO) >= 0, 
+					 "SDL could not initialize!SDL_Error: {0}", 
+					 SDL_GetError());
+
+		//Create window
+		m_pWindow = SDL_CreateWindow(
+			m_Title.c_str(),
+			SDL_WINDOWPOS_UNDEFINED, 
+			SDL_WINDOWPOS_UNDEFINED, 
+			static_cast<int>(m_Width), 
+			static_cast<int>(m_Height), 
+			SDL_WINDOW_SHOWN
+		);
+
+		FZLOG_ASSERT(m_pWindow, "Window could not be created! SDL_Error: {0}", SDL_GetError());
+
+
+		//Get window surface
+		m_pSurface = SDL_GetWindowSurface(m_pWindow);
+
+		//Fill the surface white
+		SDL_FillRect(m_pSurface, NULL, SDL_MapRGB(m_pSurface->format, 0xFF, 0xFF, 0xFF));
 	}
 
 	void WindowSDL2::Release()
 	{
+		SDL_DestroyWindow(m_pWindow);
+		SDL_Quit();
 	}
 
-	void WindowSDL2::Frame(bool& isRunning)
+	void WindowSDL2::PollEvent()
 	{
+		if (m_EventCallbackFunc == nullptr)
+			return;
+
+		SDL_Event event;
+		while (SDL_PollEvent(&event))
+		{
+			switch (event.type)
+			{
+				case SDL_QUIT: {
+					WindowCloseEvent e;
+					m_EventCallbackFunc(e);
+				} break;
+				case SDL_KEYDOWN: {
+					KeyPressedEvent e(TypeConverter::ToVegaKeyType(event.key.keysym.sym));
+					m_EventCallbackFunc(e);
+				} break;
+				case SDL_KEYUP: {
+					KeyReleasedEvent e(TypeConverter::ToVegaKeyType(event.key.keysym.sym));
+					m_EventCallbackFunc(e);
+				} break;
+				case SDL_MOUSEBUTTONDOWN: {
+					MouseButtonPressedEvent e(TypeConverter::ToVegaMouseButtonType(event.button.type));
+					m_EventCallbackFunc(e);
+				} break;
+				case SDL_MOUSEBUTTONUP: {
+					MouseButtonReleasedEvent e(TypeConverter::ToVegaMouseButtonType(event.button.type));
+					m_EventCallbackFunc(e);
+				} break;
+				case SDL_MOUSEMOTION: {
+					MouseMovedEvent e(
+						static_cast<int>(event.button.x), 
+						static_cast<int>(event.button.y)
+					);
+					m_EventCallbackFunc(e);
+				}
+			}
+		}
+
 	}
 
-	inline unsigned int WindowSDL2::GetWidth() const
+	void WindowSDL2::Frame()
 	{
-		return 0;
+		SDL_UpdateWindowSurface(m_pWindow);
 	}
 
-	inline unsigned int WindowSDL2::GetHeight() const
+	void WindowSDL2::SetEventCallback(const EventCallbackFn& callback)
 	{
-		return 0;
-	}
-
-	inline const std::string& WindowSDL2::GetTitle() const
-	{
-		// TODO: insert return statement here
-	}
-
-	void WindowSDL2::InitWindow()
-	{
-	}
-
-	void WindowSDL2::ReleaseWindow()
-	{
-
+		m_EventCallbackFunc = callback;
 	}
 
 } // namespace vega

@@ -34,17 +34,6 @@ libdirs
 
 links
 {
-	-- "VegaEngine2",
-	-- "VegaEngine2.lib",
-	-- "sfml-audio.lib",
-	-- "sfml-graphics.lib",
-	-- "sfml-main.lib",
-	-- "sfml-network.lib",
-	-- "sfml-system.lib",
-	-- "sfml-window.lib",
-	-- "ImGui.lib",
-	-- "opengl32",
-	-- "box2d.lib",
 }
 
 prebuildcommands 

@@ -23,10 +23,12 @@ workspace "Solution"
 	IncludeDir["VegaEditor"]	= "%{wks.location}/VegaEditor/VegaEditor/src"
 	IncludeDir["Workspace"]		= "%{wks.location}/Workspace/Workspace"
 	IncludeDir["Entt"]			= "%{wks.location}/Vendor/entt/include"
+	IncludeDir["SDL2"]			= "%{wks.location}/Vendor/sdl2/include"
 
 	-- Library Path
 	LibraryDir = {}
 	LibraryDir["VegaEngine"]	= "%{wks.location}/Build/bin/%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}/VegaEngine"
+	LibraryDir["SDL2"]			= "%{wks.location}/Vendor/sdl2/lib/%{cfg.architecture}"
 
 	-- DLL Working Directories
 	WorkingDir = {}

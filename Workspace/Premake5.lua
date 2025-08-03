@@ -27,12 +27,12 @@ includedirs
 
 libdirs
 {
-	"%{LibraryDir.VegaEngine}/"
+	"%{LibraryDir.VegaEngine}/",
 }
 
 links
 {
-	"VegaEngine.lib"
+	"VegaEngine.lib",
 }
 
 prebuildcommands 
@@ -47,6 +47,7 @@ buildoptions { "/bigobj" }
 defines
 {
 	"VG_PLATFORM_WINDOWS",
+	"SDL_MAIN_HANDLED",
 }
 
 filter "configurations:Debug"
