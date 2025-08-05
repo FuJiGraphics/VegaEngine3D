@@ -6,6 +6,7 @@ namespace vega {
 	class IWindow;
 	class LayerContainer;
 	class Event;
+	class WindowCloseEvent;
 
 	class System
 	{
@@ -18,7 +19,10 @@ namespace vega {
 		void Frame();
 		void OnEvent(vega::Event& e);
 
+		bool OnWindowClose(WindowCloseEvent& e);
+
 		inline bool IsRunning() const { return m_IsRunning; }
+		inline void ExitProgram() { m_IsRunning = false; }
 
 	private:
 		bool m_IsRunning = true;

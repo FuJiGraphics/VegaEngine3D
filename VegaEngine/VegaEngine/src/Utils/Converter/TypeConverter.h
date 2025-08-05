@@ -14,6 +14,8 @@ namespace vega {
 	private:
 		static std::unordered_map<uint32_t, KeyType> s_KeyMap;
 		static std::unordered_map<uint32_t, MouseButtonType> s_MouseButtonMap;
+
+		static bool s_IsInitailized;
 	};
 
 } // namespace vega

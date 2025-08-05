@@ -80,6 +80,8 @@ namespace vega {
 		Right,        //!< Right arrow
 		Up,           //!< Up arrow
 		Down,         //!< Down arrow
+		Less,		  //!< Less < Key
+		Greater,	  //!< Greater > key
 		Numpad0,      //!< The numpad 0 key
 		Numpad1,      //!< The numpad 1 key
 		Numpad2,      //!< The numpad 2 key

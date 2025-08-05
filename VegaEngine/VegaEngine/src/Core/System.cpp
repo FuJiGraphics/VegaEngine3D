@@ -38,7 +38,16 @@ namespace vega {
 
 	void System::OnEvent(vega::Event& e)
 	{
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<WindowCloseEvent>(VG_BIND_CALLBACK_FN(System::OnWindowClose));
+
 		FZLOG_INFO(e.ToString());
+	}
+
+	bool System::OnWindowClose(WindowCloseEvent& e)
+	{
+		ExitProgram();
+		return true;
 	}
 
 } // namespace vega
