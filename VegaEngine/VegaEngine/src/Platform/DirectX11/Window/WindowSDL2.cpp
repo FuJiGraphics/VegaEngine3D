@@ -25,6 +25,7 @@ namespace vega {
 
 	WindowSDL2::~WindowSDL2()
 	{
+		// Empty
 	}
 
 	void WindowSDL2::Init()

@@ -16,13 +16,15 @@ namespace vega {
 		winSpec.Title = title;
 		m_Window = IWindow::Create(winSpec);
 		m_Window->SetEventCallback(VG_BIND_CALLBACK_FN(System::OnEvent));
-
 	}
 
 	void System::Init()
 	{
 		// Init Window and run
 		m_Window->Init();
+		
+		// Init Input System
+		Input::Init(EInputDevice::Windows);
 	}
 
 	void System::Release()

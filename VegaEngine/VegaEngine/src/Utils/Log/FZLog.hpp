@@ -15,6 +15,16 @@ namespace fzlog_internal {
         
         struct NoArg {};
 
+		inline std::ostream& operator<<(std::ostream& os, const vega::KeyType& key)
+		{
+			return os << magic_enum::enum_name(key); // 문자열 변환 후 출력
+		}
+
+		inline std::ostream& operator<<(std::ostream& os, const vega::MouseButtonType& key)
+		{
+			return os << magic_enum::enum_name(key); // 문자열 변환 후 출력
+		}
+
         inline std::ostream& operator<<(std::ostream& stream, const NoArg& arg)
         {
             return stream;
