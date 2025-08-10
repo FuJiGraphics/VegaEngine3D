@@ -29,11 +29,15 @@ includedirs
 
 libdirs
 {
-	-- "%{LibraryDir.VegaEngine2}/%{cfg.buildcfg}/",
 }
 
 links
 {
+	"d3d11.lib",
+	"D3DCompiler.lib",
+	"dxgi.lib",
+	"dxguid.lib",
+	"SDL2.lib",
 }
 
 prebuildcommands 

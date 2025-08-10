@@ -32,6 +32,7 @@ namespace vega {
 		virtual unsigned int GetHeight() const = 0;
 		virtual std::string GetTitle() const = 0;
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
+		virtual void* GetNativeWindow() const = 0;
 
 	protected:
 		IWindow(IWindow&) = delete;

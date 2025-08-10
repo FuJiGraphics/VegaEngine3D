@@ -2,6 +2,7 @@
 #include "System.h"
 #include "IWindow.h"
 #include "Layer/LayerContainer.h"
+#include "Platform/DirectX11/ImGui/ImGuiManager.h"
 
 namespace vega {
 
@@ -25,10 +26,13 @@ namespace vega {
 		
 		// Init Input System
 		Input::Init(EInputDevice::Windows);
+
+		ImGuiManager::Init(m_Window->GetNativeWindow());
 	}
 
 	void System::Release()
 	{
+		ImGuiManager::Release();
 		m_Window->Release();
 	}
 
@@ -36,6 +40,9 @@ namespace vega {
 	{
 		m_Window->PollEvent();
 		m_Window->Frame();
+
+		ImGuiManager::Frame();
+		ImGuiManager::Render();
 	}
 
 	void System::OnEvent(vega::Event& e)

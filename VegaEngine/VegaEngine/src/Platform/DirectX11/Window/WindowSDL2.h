@@ -25,6 +25,7 @@ namespace vega {
 		inline unsigned int GetWidth() const final { return m_Width; }
 		inline unsigned int GetHeight() const final { return m_Height; }
 		inline std::string GetTitle() const final { return m_Title; }
+		inline void* GetNativeWindow() const final { return (void*)m_pWindow; }
 
 		void InitEventHandler();
 
