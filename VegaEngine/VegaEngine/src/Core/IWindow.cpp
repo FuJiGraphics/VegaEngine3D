@@ -4,13 +4,11 @@
 
 namespace vega {
 
-	static Shared<IWindow> s_TargetMessageHandler = nullptr;
-
 	Shared<IWindow> IWindow::Create(const WindowSpec& spec)
 	{
 		switch (spec.Api)
 		{
-			case WindowAPI::SDL2:
+			case WindowAPI::SDL2: 
 				return CreateShared<WindowSDL2>(spec);
 		}
 	}

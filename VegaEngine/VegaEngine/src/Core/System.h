@@ -7,6 +7,7 @@ namespace vega {
 	class LayerContainer;
 	class Event;
 	class WindowCloseEvent;
+	class IRenderContext;
 
 	/**
 	 * @brief Core system class that manages the game loop and window events.
@@ -73,9 +74,10 @@ namespace vega {
 		inline void ExitProgram() { m_IsRunning = false; }
 
 	private:
-		bool m_IsRunning = true;               ///< Flag to control the main loop.
-		Shared<IWindow> m_Window;              ///< Main application window.
-		// Shared<LayerContainer> m_LayerContainer; ///< (Commented out) Layer management container.
+		bool m_IsRunning = true;					///< Flag to control the main loop.
+		Shared<IWindow> m_Window;					///< Main application window.
+		Shared<LayerContainer> m_LayerContainer;	///< (Commented out) Layer management container.
+		Shared<IRenderContext> m_RenderContext;		/// Rendering Context
 	};
 
 	/**

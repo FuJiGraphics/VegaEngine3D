@@ -2,6 +2,7 @@
 #include "System.h"
 #include "IWindow.h"
 #include "Layer/LayerContainer.h"
+#include "Graphic/IRenderContext.h"
 #include "Platform/DirectX11/ImGui/ImGuiManager.h"
 
 namespace vega {
@@ -17,32 +18,41 @@ namespace vega {
 		winSpec.Title = title;
 		m_Window = IWindow::Create(winSpec);
 		m_Window->SetEventCallback(VG_BIND_CALLBACK_FN(System::OnEvent));
+
+		// Generate Rendering Context
+		RenderSpec conSpec;
+		conSpec.Api = GraphicsAPI::DirectX11;
+		m_RenderContext = IRenderContext::Create(conSpec);
 	}
 
 	void System::Init()
 	{
-		// Init Window and run
-		m_Window->Init();
-		
-		// Init Input System
-		Input::Init(EInputDevice::Windows);
+		m_Window->Init();					
+		m_RenderContext->Init(*m_Window);
 
-		ImGuiManager::Init(m_Window->GetNativeWindow());
+		Input::Init(EInputDevice::Windows);
+		ImGuiManager::Init(*m_Window, *m_RenderContext);
 	}
 
 	void System::Release()
 	{
-		ImGuiManager::Release();
+		ImGuiManager::Release(*m_Window, *m_RenderContext);
 		m_Window->Release();
 	}
 
 	void System::Frame()
 	{
 		m_Window->PollEvent();
-		m_Window->Frame();
 
-		ImGuiManager::Frame();
-		ImGuiManager::Render();
+		{ // ImGui
+			ImGuiManager::Frame();
+		}
+		// Rendering
+		{
+			m_RenderContext->Render();
+		}
+
+		m_RenderContext->Present();
 	}
 
 	void System::OnEvent(vega::Event& e)

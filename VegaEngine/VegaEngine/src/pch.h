@@ -5,6 +5,19 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <map>
+#include <set>
+#include <unordered_set>
+
+// window and rendering
+#include <SDL.h>
+#include <SDL_syswm.h>
+#include <d3d11.h>
+
+// ImGui
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_dx11.h"
+#include "imgui/imgui_impl_sdl2.h"
 
 // Libraries
 #include "Utils/MagicEnum/magic_enum.hpp"

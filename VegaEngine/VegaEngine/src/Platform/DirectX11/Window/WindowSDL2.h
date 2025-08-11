@@ -11,7 +11,7 @@ namespace vega {
 	class IWindow;
 	struct WindowSpec;
 
-	class WindowSDL2 : public IWindow
+	class WindowSDL2 final : public IWindow
 	{
 	public:
 		WindowSDL2(const WindowSpec& spec);
@@ -19,6 +19,10 @@ namespace vega {
 
 		void Init() final;
 		void Release() final;
+
+		void Init_ImGui() final;
+		void Release_ImGui() final;
+
 		void PollEvent() final;
 		void Frame() final;
 

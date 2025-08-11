@@ -25,6 +25,10 @@ namespace vega {
 
 		virtual void Init() = 0;
 		virtual void Release() = 0;
+
+		virtual void Init_ImGui() = 0;
+		virtual void Release_ImGui() = 0;
+
 		virtual void PollEvent() = 0;
 		virtual void Frame() = 0;
 

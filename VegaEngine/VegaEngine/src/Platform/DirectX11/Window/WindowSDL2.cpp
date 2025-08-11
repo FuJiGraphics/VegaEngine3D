@@ -1,9 +1,7 @@
 #include "pch.h"
-
-#include <SDL.h>
-
 #include "Core/IWindow.h"
 #include "WindowSDL2.h"
+#include "Platform/DirectX11/ImGui/ImGuiManager.h"
 
 namespace vega {
 
@@ -74,7 +72,9 @@ namespace vega {
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
 		{
-			if (m_EventHandlerMap.contains(event.type))
+			ImGuiManager::PollEvent(event);
+
+			if (!ImGuiManager::IsFocusUI(event) && m_EventHandlerMap.contains(event.type))
 			{
 				m_EventHandlerMap[event.type](event);
 			}
@@ -155,6 +155,16 @@ namespace vega {
 	void WindowSDL2::SetEventCallback(const EventCallbackFn& callback)
 	{
 		m_EventCallbackFunc = callback;
+	}
+
+	void WindowSDL2::Init_ImGui()
+	{
+		FZLOG_ASSERT(ImGui_ImplSDL2_InitForD3D(m_pWindow), "Failed to initalized a ImGui_ImplSDL2_InitForD3D")
+	}
+
+	void WindowSDL2::Release_ImGui()
+	{
+		ImGui_ImplSDL2_Shutdown();
 	}
 
 } // namespace vega
